@@ -46,7 +46,7 @@ function factoryDebouncing(func, timer) {
 // 'element' will be the input element passed from the debounced function
 function searchPrint(element) {
     if (element.value != "") {
-        alert(element.value) // show the value in an alert
+        console.log(element.value) // show the value in an alert
     }
 }
 
@@ -65,11 +65,36 @@ if (searchElementDebouncing) {
         debouncingSearchPrint(searchElementDebouncing);
     });
 }
+function searchPrintAgain(element) {
+  console.log(element.value);
+}
 
+function factoryTrotteling(func, delay) {
+  let isThrottling = false;
 
+  return function (...params) {
+    if (!isThrottling) {
+      isThrottling = true;
+      func(...params); // run immediately for throttling
 
+      setTimeout(() => {
+        isThrottling = false;
+      }, delay);
+    }
+  };
+}
 
-let searchElementTrotteling = document.querySelector("#serachBarTrotteling")
+const delay = 1000; // 1 sec example
+const searchPrintTrotteling = factoryTrotteling(searchPrintAgain, delay);
+
+const searchElementTrotteling = document.querySelector("#serachBarTrotteling");
+
+if (searchElementTrotteling) {
+  searchElementTrotteling.addEventListener("input", () => {
+    searchPrintTrotteling(searchElementTrotteling);
+  });
+}
+
 
 
 
