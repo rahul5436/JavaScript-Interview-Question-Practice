@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Style Search</title>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .search-box {
+            width: 500px;
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid #dcdcdc;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
+            transition: 0.3s ease;
+        }
+
+        .search-box:hover {
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .search-icon {
+            margin-right: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+    <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input id="serachBarDebouncing" type="text" placeholder="Debouncing SearchBar">
+    </div>
+    <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input id="serachBarTrotteling" type="text" placeholder="serachBarTrotteling SearchBar">
+    </div>
+    </div>
+    <script src="./debouncingAndThrottling.js"></script>
+</body>
+</html>
