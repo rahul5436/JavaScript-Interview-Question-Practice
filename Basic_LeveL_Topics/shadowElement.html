@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow DOM Example</title>
+    <style>
+        .box{
+            background-color: red !important;
+        }
+    </style>
+</head>
+
+<body>
+    <my-card>
+        This element cant be changed by the DOM operations
+    </my-card>
+    <div class="box">This can be changed by the DOM operations</div>
+
+    <script>
+        class MyCard extends HTMLElement {
+            constructor() {
+                super(); // ✅ Correct
+                const shadow = this.attachShadow({ mode: "open" });
+
+                // if this is open we can have 
+                // document.querySelector("my-card").shadowRoot.querySelector(".box").style.background="green"
+                // other option closed
+
+                shadow.innerHTML = `
+                    <style>
+                        .box {
+                            padding: 10px;
+                            background: lightblue;
+                            border-radius: 8px;
+                            font-size: 20px;
+                        }
+                    </style>
+
+                    <div class="box shadowBox">
+                        This is inside Shadow DOM
+                    </div>
+                `;
+            }
+        }
+
+        customElements.define("my-card", MyCard); // ✅ Correct class name
+    </script>
+</body>
+
+</html>
