@@ -19,35 +19,35 @@ let searchElementDebouncing = document.querySelector("#serachBarDebouncing")
 // A factory function that creates a debounced version of any function
 function factoryDebouncing(func, timer) {
 
-    console.log("called the main function")
+  console.log("called the main function")
 
-    // This variable will store the timeout ID between multiple calls
-    let timeOutId
+  // This variable will store the timeout ID between multiple calls
+  let timeOutId
 
-    // Returning a new function (this creates a closure)
-    // "...param" collects all arguments passed into an array
-    return function (...param) {
+  // Returning a new function (this creates a closure)
+  // "...param" collects all arguments passed into an array
+  return function (...param) {
 
-        // If the function was called earlier, cancel its previous timer
-        clearTimeout(timeOutId)
+    // If the function was called earlier, cancel its previous timer
+    clearTimeout(timeOutId)
 
-        // Start a new timer
-        timeOutId = setTimeout(() => {
+    // Start a new timer
+    timeOutId = setTimeout(() => {
 
-            // After timer finishes, we call the original function
-            // "...param" spreads array back into separate arguments
-            func(...param)
+      // After timer finishes, we call the original function
+      // "...param" spreads array back into separate arguments
+      func(...param)
 
-        }, timer) // delay in milliseconds
-    }
+    }, timer) // delay in milliseconds
+  }
 }
 
 // Function that prints the entered value
 // 'element' will be the input element passed from the debounced function
 function searchPrint(element) {
-    if (element.value != "") {
-        console.log(element.value) // show the value in an alert
-    }
+  if (element.value != "") {
+    console.log(element.value) // show the value in an alert
+  }
 }
 
 // Creating a debounced version of searchPrint
@@ -57,17 +57,28 @@ const debouncingSearchPrint = factoryDebouncing(searchPrint, 1000)
 // Add event listener only if element exists in DOM
 if (searchElementDebouncing) {
 
-    // on every key press ("input" event):
-    searchElementDebouncing.addEventListener("input", () => {
+  // on every key press ("input" event):
+  searchElementDebouncing.addEventListener("input", () => {
 
-        // pass the input element as argument
-        // but debounce will delay the execution
-        debouncingSearchPrint(searchElementDebouncing);
-    });
+    // pass the input element as argument
+    // but debounce will delay the execution
+    debouncingSearchPrint(searchElementDebouncing);
+  });
 }
 function searchPrintAgain(element) {
   console.log(element.value);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function factoryTrotteling(func, delay) {
   let isThrottling = false;
